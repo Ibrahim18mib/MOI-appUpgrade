@@ -1,0 +1,51 @@
+
+
+<router-outlet></router-outlet>
+
+<div
+  class="main-container h-100% w-100% d-flex justify-content-center align-items-center"
+>
+  <div class="item1-container h-50% w-50% d-flex flex-grow-1">
+    <img src="../../assets/images/kuwait-city-2.svg" />
+  </div>
+  <div class="white-card h-100px w-100px d-flex">
+    <div class="item2-container h-50% w-50% d-flex">
+      <div class="login-container h-50% w-50%">
+        <form [formGroup]="loginForm"  (ngSubmit)="onLogin()">
+          <h1>تسجيل الدخول</h1>
+          <span>إلى حسابك للوصول إلى التطبيقات الرئيسية</span>
+          <br />
+          <Label>رقم المستخدم</Label>
+          <input type="number" name="number" formControlName="number"  placeholder="رقم المستخدم" />
+          <Label>كلمة المرور</Label>
+          <input type="password" name="password" formControlName="password"  placeholder="كلمة المرور" />
+          <a href="#" class="btn-primary">نسيت كلمة المرور؟</a>
+          <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">تسجيل الدخول</button>
+        </form>
+      </div>
+      <div class="moi-logo-container h-50% w-50% d-flex flex-column">
+        <img src="../../assets/images/MOI LOGO.svg" alt="MoI LOGO" />
+
+        <div class="checklink-container">
+          <h1>Moi Verifications</h1>
+          <a href="#">Get number</a
+          ><img src="../../assets/icons/check-circle.svg" alt="check-circle" />
+          <a href="#">civil number</a
+          ><img src="../../assets/icons/check-circle.svg" />
+          <a href="#">Get number</a
+          ><img src="../../assets/icons/check-circle.svg" />
+          <a href="#">Get number</a
+          ><img src="../../assets/icons/check-circle.svg" />
+          <a href="#">civil number</a
+          ><img src="../../assets/icons/check-circle.svg" />
+          <a href="#">Get number</a
+          ><img src="../../assets/icons/check-circle.svg" />
+        </div>
+
+        <div class="securitylog">
+          <img src="../../assets/images/cybersecurity 1.svg" alt="Left Image" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

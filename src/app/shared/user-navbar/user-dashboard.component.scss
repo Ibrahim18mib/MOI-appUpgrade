@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.main-container {
+  background: #ffffff;
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #f5f7fa;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.win-action img {
+  padding-left: 10px;
+}
+
+.com-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchbar {
+  margin-right: 10%;
+  width: 20%;
+}
+
+.searchbar input {
+  border-radius: 10px;
+}
+
+.searchbar img {
+  transform: translateX(-20px);
+}
+
+.upgrade-btn {
+}
+
+.in-action1,
+.in-action2,
+.in-action3,
+.in-action4 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-right: 1.25rem !important;
+  padding-left: 1.25rem !important;
+  margin-top: 1rem !important;
+}
+
+.logo-info {
+  align-content: center;
+  padding-right: 20px;
+  font-weight: bold;
+}
+
+.app-logo {
+  display: flex;
+}
+
+.logo img {
+  height: 3.5rem;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+}
+
+//body
+.body-side {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  background-color: #f5f7fa;
+  height: 85vh;
+}
+
+.app-body {
+  border-top: 2px solid #cbd0dd;
+  border-right: 2px solid #cbd0dd;
+  border-bottom: 2px solid #cbd0dd;
+  height: 100%;
+  width: 80%;
+}
+.app-side {
+  border-top: 2px solid #cbd0dd;
+  border-bottom: 2px solid #cbd0dd;
+  height: 100%;
+  width: 20%;
+  background-color: #ffffff;
+}
+//footer
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  background-color: #ffffff;
+}
+.footer-in {
+  gap: 20px;
+}
+
+.footer-side {
+}
+
+.ellipse-side {
+}
+.ellipse-side img {
+}
