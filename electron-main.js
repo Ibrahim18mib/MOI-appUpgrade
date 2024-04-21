@@ -6,6 +6,9 @@ const updater = require("./updater");
 let mainWindow;
 
 function createWindow() {
+  ///updater calling after 3s
+  setTimeout(updater, 3000);
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,

@@ -1,12 +1,12 @@
-//Electron-Updater Module 
-const {autoUpdater } = require('electron-updater');
+//Electron-Updater Module
+const { autoUpdater } = require("electron-updater");
 
 //enable autoudate debugger
-autoUpdater.logger = require("electron-log")
-autoUpdater.logger.transports.file.level = "info"
-
+autoUpdater.logger = require("electron-log");
+autoUpdater.logger.transports.file.level = "info";
 
 module.exports = () => {
-//check update (GH rele)
-autoUpdater.checkForUpdates();
-}
+  //check update (GH release)
+  console.log("Checking for update");
+  autoUpdater.checkForUpdates();
+};
