@@ -7,6 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "electron-builder -w",
+    "release": "electron-builder -w -p onTagOrDraft",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron:start": "nodemon --exec electron . --dev",
@@ -15,13 +16,12 @@
   },
   "repository": "https://github.com/Ibrahim18mib/MOI-appUpgrade",
   "homepage": "https://github.com/Ibrahim18mib/MOI-appUpgrade",
-  "publish": {
-    "provider": "github",
-    "releaseType": "release"
-  },
   "build": {
     "appId": "com.moimib.newmoi",
     "copyright": "Copyright new-MOI",
+    "publish": {
+      "provider": "github"
+    },
     "win": {
       "certificateFile": "private/newmoi-mib.pfx",
       "certificatePassword": "",

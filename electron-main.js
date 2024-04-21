@@ -33,13 +33,15 @@ function createWindow() {
   Menu.setApplicationMenu(menu);
   //end
 
-  if (isDev) {
-    mainWindow.loadURL("http://localhost:4200/home");
-  } else {
-    mainWindow.loadFile(
-      path.join(__dirname, "/dist/moi-web/index.html")
-    );
-  }
+  mainWindow.loadFile(path.join(__dirname, "./index.html"));
+
+  // if (isDev) {
+  //   mainWindow.loadURL("http://localhost:4200/home");
+  // } else {
+  //   mainWindow.loadFile(
+  //     path.join(__dirname, "/dist/moi-web/index.html")
+  //   );
+  // }
 }
 
 app.whenReady().then(() => {
