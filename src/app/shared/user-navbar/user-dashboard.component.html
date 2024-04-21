@@ -2,9 +2,9 @@
   <div class="navbar-container">
     <div class="actions">
       <div class="win-action">
-        <img src="../../assets/icons/x.svg"  (click)="closeApp()">  
-        <img src="../../assets/icons/dice-bg.svg" (click)="maxApp()" >
-        <img src="../../assets/icons/dash.svg"  (click)="minApp()">
+        <img src="../../assets/icons/x.svg" (click)="closeApp()" />
+        <img src="../../assets/icons/dice-bg.svg" (click)="maxApp()" />
+        <img src="../../assets/icons/dash.svg" (click)="minApp()" />
       </div>
       <div class="com-action">
         <div class="in-action1">
@@ -27,10 +27,17 @@
       </div>
     </div>
 
-    <div class="searchbar"><input type="search" placeholder="Search Here"><img src="../../assets/icons/search.svg" /></div>
-  <div class="upgrade-btn">
-    <button class="btnUpgrade p-1 fw-bold" (click)="appUpgrade()">Upgrade</button>
-  </div>
+    <div class="searchbar">
+      <input type="search" placeholder="Search Here" /><img
+        src="../../assets/icons/search.svg"
+      />
+    </div>
+    <div class="upgrade-btn">
+      <button class="btnUpgrade p-1 fw-bold" id="upbtn" (click)="appUpgrade()">
+        Upgrade
+      </button>
+      Current value: <strong id="counter">0</strong>
+    </div>
     <div class="app-logo px-2">
       <div class="logo-info">
         <p class="mb-2">وزارة الداخلية</p>
@@ -43,33 +50,29 @@
   <div class="body-side">
     <div class="body-content"></div>
     <div class="app-body">APP-content</div>
-    <div class="app-side ">
+    <div class="app-side">
       <div class="d-flex justify-content-end p-2">
         <p>القائمة الرئيسية</p>
-        <img class="px-2 "src="../../assets/icons/house-door.svg" />
+        <img class="px-2" src="../../assets/icons/house-door.svg" />
       </div>
     </div>
   </div>
-<!--Footer-->
+  <!--Footer-->
   <div class="footer">
     <div class="footer-in d-flex">
       <div class="footer-side d-flex">
         <p>الإدارة العامة لنظم المعلومات</p>
-        <img class="px-2 "src="../../assets/icons/buildings.svg" />
+        <img class="px-2" src="../../assets/icons/buildings.svg" />
       </div>
-      <div class="footer-side d-flex ">
-        <p >10498 - سعيد صقر سعد المطيري</p>
-        <img class="px-3 " src="../../assets/icons/person.svg" />
+      <div class="footer-side d-flex">
+        <p>10498 - سعيد صقر سعد المطيري</p>
+        <img class="px-3" src="../../assets/icons/person.svg" />
       </div>
     </div>
 
     <div class="ellipse-side d-flex">
-      <p class="px-2 ">متصل</p>
+      <p class="px-2">متصل</p>
       <img class="px-2" src="../../assets/icons/Ellipse 329.svg" />
-      
     </div>
   </div>
-
-
-
 </div>

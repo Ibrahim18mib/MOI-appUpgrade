@@ -7,7 +7,15 @@ declare global {
       minimize: () => void;
       maximize: () => void;
       close: () => void;
+      updateMessage: (callback: () => void) => void;
     };
+  }
+}
+
+//handle message
+declare global {
+  interface Window {
+    handleMessage: (message: string) => void;
   }
 }
 
@@ -20,7 +28,12 @@ export class UserDashboardComponent implements OnInit {
   number!: string;
   password!: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+    // Call the handleMessage function when a message is received
+    window.handleMessage = (message: string) => {
+      console.log('Message from main process:', message);
+    };
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -35,14 +48,19 @@ export class UserDashboardComponent implements OnInit {
     window.actions.close();
   }
   maxApp(): void {
-    console.log('maximize APP');
+    console.log('maximize APP', window);
     window.actions.maximize();
   }
   minApp(): void {
     console.log('Minimising APP');
     window.actions.minimize();
   }
-  appUpgrade(): void {
-    console.log('Upgrade needed');
+  appUpgrade() {
+    // Pass a callback function to updateMessage
+  window.actions.updateMessage(() => {
+    console.log('Update message callback executed');
+    // You can add any additional logic inside this callback function
+  });
+    
   }
 }

@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require("electron/main");
+const { app, BrowserWindow, ipcMain, Menu } = require("electron/main");
 const path = require("node:path");
 const isDev = process.argv.includes("--dev");
+const updater = require("./updater");
 
 let mainWindow;
 
@@ -13,17 +14,43 @@ function createWindow() {
     },
   });
 
+  //atrt
+  const menu = Menu.buildFromTemplate([
+    {
+      label: app.name,
+      submenu: [
+        {
+          click: () => mainWindow.webContents.send("update-counter", 1),
+          label: "Increment",
+        },
+        {
+          click: () => mainWindow.webContents.send("update-counter", -1),
+          label: "Decrement",
+        },
+      ],
+    },
+  ]);
+  Menu.setApplicationMenu(menu);
+  //end
+
   if (isDev) {
-    mainWindow.loadURL("http://localhost:4200");
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL("http://localhost:4200/home");
   } else {
     mainWindow.loadFile(
-      path.join(__dirname, "/dist/moi-application-manager/browser/index.html")
+      path.join(__dirname, "/dist/moi-web/index.html")
     );
   }
 }
 
 app.whenReady().then(() => {
+  ipcMain.on("counter-value", (_event, value) => {
+    console.log(value); // will print value to Node console
+  });
+
+  ipcMain.on("update-message", (_event, value) => {
+    console.log(value); // will print value to Node console
+  });
+
   createWindow();
 
   app.on("activate", () => {
@@ -56,4 +83,11 @@ ipcMain.handle("close-window", () => {
   if (mainWindow) {
     mainWindow.close();
   }
+});
+
+ipcMain.handle("app-Updater", () => {
+  mainWindow.webContents.send(
+    "sending to the preload...",
+    "Data to send to preload"
+  );
 });

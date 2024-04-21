@@ -1,26 +1,35 @@
 {
-  "name": "moi-application-manager",
-  "version": "0.0.0",
+  "name": "newmoi",
+  "version": "1.0.0",
   "main": "electron-main.js",
+  "description": "NEW MOI Kuwait Project ",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "electron-builder -w",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron:start": "nodemon --exec electron . --dev",
-    "electron:build": "ng build --base-href ./ && electron ."
+    "electron:build": "ng build --base-href ./ && electron .",
+    "win-cert": "electron-builder create-self-signed-cert -p newmoi-mib"
+  },
+  "repository": "https://github.com/Ibrahim18mib/MOI-appUpgrade",
+  "homepage": "https://github.com/Ibrahim18mib/MOI-appUpgrade",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
   },
   "build": {
-    "appId": "com.moimib.autoupdate",
+    "appId": "com.moimib.newmoi",
+    "copyright": "Copyright new-MOI",
     "win": {
-      "target": "nsis"
-    },
-    "directories": {
-      "output": "dist"
+      "certificateFile": "private/newmoi-mib.pfx",
+      "certificatePassword": "",
+      "verifyUpdateCodeSignature": false,
+      "publisherName": "newmoi-mib"
     }
   },
-  "author": "moi-Mib",
+  "author": "moi-mib",
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.0",
@@ -34,7 +43,7 @@
     "@ng-bootstrap/ng-bootstrap": "^16.0.0-rc.2",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
-    "electron-builder": "^24.13.3",
+    "electron-log": "^5.1.2",
     "electron-updater": "^6.1.8",
     "nodemon": "^3.1.0",
     "rxjs": "~7.8.0",
@@ -47,6 +56,7 @@
     "@angular/compiler-cli": "^17.3.0",
     "@types/jasmine": "~5.1.0",
     "electron": "^29.2.0",
+    "electron-builder": "^24.13.3",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
