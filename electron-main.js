@@ -7,7 +7,7 @@ let mainWindow;
 
 function createWindow() {
   ///updater calling after 3s
-  setTimeout(updater, 3000);
+  setTimeout(updater, 1500);
 
   mainWindow = new BrowserWindow({
     width: 800,
