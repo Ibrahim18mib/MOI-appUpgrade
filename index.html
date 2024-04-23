@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    /> -->
+
     <title>Facebook clone</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -16,6 +22,14 @@
   </head>
   <body>
     <!--Header Starts-->
+    <!--check Starts-->
+    Title: <input id="title" />
+    <button id="btn" type="button">Set</button>
+    <button type="button" id="btn1">Open a File</button>
+    File path: <strong id="filePath"></strong>
+    <!-- <button id="btnUpgrade" type="button" (onClick)="btnUpgrade()">Upgrade</button> -->
+    <script src="./renderer.js"></script>
+    <!--check Ends-->
     <div class="header">
       <div class="header__left">
         <img
@@ -260,6 +274,5 @@
       <!--Feed ends-->
     </div>
     <!--Main body Ends-->
-  
   </body>
 </html>

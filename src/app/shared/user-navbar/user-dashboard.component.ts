@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 declare global {
@@ -7,17 +7,20 @@ declare global {
       minimize: () => void;
       maximize: () => void;
       close: () => void;
-      updateMessage: (callback: () => void) => void;
+      updateMessage: () => Promise<void>;
     };
   }
 }
 
-//handle message
-declare global {
-  interface Window {
-    handleMessage: (message: string) => void;
-  }
+// Define the types for DOM elements
+interface HTMLElements {
+  upgradeButton: HTMLButtonElement;
 }
+
+// Access DOM elements
+const elements: HTMLElements = {
+  upgradeButton: document.getElementById('btnUpgrade') as HTMLButtonElement,
+};
 
 @Component({
   selector: 'app-user-dashboard',
@@ -28,11 +31,12 @@ export class UserDashboardComponent implements OnInit {
   number!: string;
   password!: string;
 
-  constructor(private route: ActivatedRoute) {
-    // Call the handleMessage function when a message is received
-    window.handleMessage = (message: string) => {
-      console.log('Message from main process:', message);
-    };
+  constructor(
+    private route: ActivatedRoute,
+    private elRef: ElementRef,
+    private renderer: Renderer2
+  ) {
+    console.log('Constructor running');
   }
 
   ngOnInit(): void {
@@ -40,6 +44,22 @@ export class UserDashboardComponent implements OnInit {
       this.number = params['number'];
       this.password = params['password'];
     });
+
+    console.log('NG ONINTIT');
+    //
+    const upgradeButton = this.elRef.nativeElement.querySelector('#btnUpgrade');
+
+    // Check if upgradeButton element exists
+    if (upgradeButton) {
+      // Add event listener to the button
+      this.renderer.listen(
+        upgradeButton,
+        'click',
+        this.handleUpgradeButtonClick
+      );
+    } else {
+      console.error('Upgrade button element not found.');
+    }
   }
 
   ///windows ACTION methods
@@ -55,12 +75,16 @@ export class UserDashboardComponent implements OnInit {
     console.log('Minimising APP');
     window.actions.minimize();
   }
-  appUpgrade() {
-    // Pass a callback function to updateMessage
-  window.actions.updateMessage(() => {
-    console.log('Update message callback executed');
-    // You can add any additional logic inside this callback function
-  });
-    
+
+  //handling callback
+  handleUpgradeButtonClick() {
+    console.log('Upgrade element clicked', window);
+    window.actions.updateMessage()
+    .then(() => {
+      console.log("Masseage updated successfully...");
+    })
+    .catch((error) => {
+      console.error('An error occurred while updating the message:', error);
+    });
   }
 }

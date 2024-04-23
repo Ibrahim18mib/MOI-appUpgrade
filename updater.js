@@ -12,6 +12,7 @@ autoUpdater.autoDownload = false;
 module.exports = () => {
   //check update (GH release)
   console.log("Checking for update");
+  
   autoUpdater.checkForUpdates();
 
   //listen for update found

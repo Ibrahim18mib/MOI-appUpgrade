@@ -23,10 +23,18 @@
       "provider": "github"
     },
     "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
       "certificateFile": "private/newmoi-mib.pfx",
       "certificatePassword": "",
       "verifyUpdateCodeSignature": false,
       "publisherName": "newmoi-mib"
+    },
+    "nsis": {
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false,
+      "perMachine": true,
+      "deleteAppDataOnUninstall": true
     }
   },
   "author": "moi-mib",
