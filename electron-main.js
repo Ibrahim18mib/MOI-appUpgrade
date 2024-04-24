@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require("electron/main");
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require("electron/main");
 const path = require("node:path");
 const isDev = process.argv.includes("--dev");
 const updater = require("./updater");
@@ -67,15 +67,34 @@ function createWindow() {
     },
   });
 
-  // if (isDev) {
-  //   mainWindow.loadURL("http://localhost:4200/home");
-  //   mainWindow.webContents.openDevTools();
-  // } else {
-  //   mainWindow.loadFile(path.join(__dirname, "./index.html"));
+  ///menu
+  const menu = Menu.buildFromTemplate([
+    {
+      label: app.name,
+      submenu: [
+        {
+          click: () => mainWindow.webContents.send("update-counter", 1),
+          label: "Increment",
+        },
+        {
+          click: () => mainWindow.webContents.send("update-counter", -1),
+          label: "Decrement",
+        },
+      ],
+    },
+  ]);
 
-  // }
+  Menu.setApplicationMenu(menu);
+  ///menu end
 
-  mainWindow.loadFile(path.join(__dirname, "./index.html"));
+  if (isDev) {
+    mainWindow.loadURL("http://localhost:4200/home");
+    mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.loadFile(path.join(__dirname, "./index.html"));
+  }
+
+  // mainWindow.loadFile(path.join(__dirname, "./index.html"));
 }
 // new window create END
 
@@ -102,6 +121,11 @@ app.on("before-quit", () => {
 });
 
 // IPCMain handlers, Listeners
+
+ipcMain.handle("set-num", (event, value) => {
+  console.log("fianlvalue", value);
+});
+
 ipcMain.handle("dialog:openFile", handleFileOpen);
 
 ipcMain.handle("minimize-window", () => {
