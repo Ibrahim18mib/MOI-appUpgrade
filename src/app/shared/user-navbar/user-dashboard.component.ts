@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 declare global {
   interface Window {
     actions: any;
+    ipc2way: any;
   }
 }
 
@@ -33,7 +34,7 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     console.log('After view init hooked');
 
-    this.updateCounter();
+    // this.updateCounter();
   }
 
   ngOnInit(): void {
@@ -47,18 +48,18 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   }
 
   //triggered update
-  updateCounter() {
-    console.log('into update function', window);
+  // updateCounter() {
+  //   console.log('into update function', window);
 
-    window.actions.onUpdateCounter((getNumber: string) => {
-      console.log('number getter', getNumber);
-      this.counter += Number(getNumber);
+  //   window.actions.onUpdateCounter((getNumber: string) => {
+  //     console.log('number getter', getNumber);
+  //     this.counter += Number(getNumber);
 
-      window.actions.setNum(this.counter);
+  //     window.actions.setNum(this.counter);
 
-      this.cdr.detectChanges();
-    });
-  }
+  //     this.cdr.detectChanges();
+  //   });
+  // }
 
   ///windows ACTION methods
   closeApp(): void {
@@ -77,6 +78,34 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   //handling callback
   handleUpgradeButtonClick() {
     console.log('Upgrade element clicked');
-    window.actions.updateMessage();
+
+    window.ipc2way.on('updater-Info', (isUpdateAvailable: boolean) => {
+      console.log(isUpdateAvailable);
+      
+
+      // Set the flag based on whether an update is available
+      this.isUpdate = isUpdateAvailable;
+      
+    });
+
+    window.ipc2way.updateMessage();
+
+    window.ipc2way.on('update-successfull', (updateDone: boolean) => {
+      console.log('received successfull updated from main');
+      // Set the flag based on whether an update is available
+      this.isUpdate = updateDone;
+      
+    });
+  }
+
+  //handlhandleUpdateAvailable
+
+  handleUpdateAvailable() {
+    console.log('Update strats');
+  }
+
+  //handling callback
+  handleDownloadButtonClick() {
+    console.log('Download element clicked');
   }
 }

@@ -33,7 +33,15 @@
       />
     </div>
     <div class="upgrade-btn">
-      <button class="btnUpgrade p-1 fw-bold" id="btnUpgrade" (click)="handleUpgradeButtonClick()">Upgrade</button>
+      <button
+        class="btnUpgrade p-1 fw-bold"
+        id="btnUpgrade"
+        *ngIf="!isUpdate"
+        (click)="handleUpgradeButtonClick()"
+      >
+        Upgrade
+      </button>
+
       Current value: <strong id="counter">{{ counter }}</strong>
     </div>
     <div class="app-logo px-2">

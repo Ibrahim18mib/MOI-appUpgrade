@@ -45,20 +45,17 @@ function handleSetTitle(event, name) {
   console.log("this is event.sender", webCont);
   const win = BrowserWindow.fromWebContents(webCont);
   console.log("this is BrowserWindow.fromWebContents(webCont) ", win);
-
-  console.log("this is given name1: ", name);
 }
 
 //HhandleUpgrade app auto-update
 function handleUpgrade() {
   console.log("IPC MAIN Listening in update-detect");
   ///updater calling after 3s
-  setTimeout(() => {
-    updater();
-  }, 1500);
-
+  mainWindow.webContents.send("updater-Info", true);
   updater();
-  console.log("IPC MAIN responsing after updater");
+  console.log("IPC MAIN after calling updater");
+  //send success to the renderer
+  mainWindow.webContents.send("update-successfull",false);
 }
 
 function createWindow() {
@@ -153,4 +150,4 @@ ipcMain.handle("close-window", () => {
   }
 });
 
-ipcMain.handle("update-detect", handleUpgrade);
+ipcMain.on("update-detect", handleUpgrade);
