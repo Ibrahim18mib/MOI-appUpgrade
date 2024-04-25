@@ -28,12 +28,12 @@
     </div>
 
     <div class="searchbar">
-      <input type="search" placeholder="Search Here" /><img
+      <input type="search" placeholder="Searchupd Here" /><img
         src="../../assets/icons/search.svg"
       />
     </div>
     <div class="upgrade-btn">
-      <button class="btnUpgrade p-1 fw-bold" id="btnUpgrade">Upgrade</button>
+      <button class="btnUpgrade p-1 fw-bold" id="btnUpgrade" (click)="handleUpgradeButtonClick()">Upgrade</button>
       Current value: <strong id="counter">{{ counter }}</strong>
     </div>
     <div class="app-logo px-2">

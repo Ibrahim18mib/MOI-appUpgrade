@@ -3,6 +3,7 @@ const path = require("node:path");
 const isDev = process.argv.includes("--dev");
 const updater = require("./updater");
 const { setTimeout } = require("node:timers/promises");
+const { autoUpdater } = require("electron");
 
 // Check if the application is packed and dev update config is forced
 const skipUpdateCheck = false;
@@ -51,13 +52,20 @@ function handleSetTitle(event, name) {
 //HhandleUpgrade app auto-update
 function handleUpgrade() {
   console.log("IPC MAIN Listening in update-detect");
-}
-
-function createWindow() {
   ///updater calling after 3s
   setTimeout(() => {
     updater();
   }, 1500);
+
+  updater();
+  console.log("IPC MAIN responsing after updater");
+}
+
+function createWindow() {
+  ///updater calling after 3s
+  // setTimeout(() => {
+  //   updater();
+  // }, 1500);
 
   mainWindow = new BrowserWindow({
     width: isDev ? 1000 : 600,
@@ -91,7 +99,8 @@ function createWindow() {
     mainWindow.loadURL("http://localhost:4200/home");
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(path.join(__dirname, "./index.html"));
+    // mainWindow.loadFile(path.join(__dirname, "./index.html"));
+    mainWindow.loadURL("http://localhost:4200/home");
   }
 
   // mainWindow.loadFile(path.join(__dirname, "./index.html"));
@@ -122,9 +131,7 @@ app.on("before-quit", () => {
 
 // IPCMain handlers, Listeners
 
-ipcMain.handle("set-num", (event, value) => {
-  console.log("fianlvalue", value);
-});
+ipcMain.handle("set-num", (event, value) => value);
 
 ipcMain.handle("dialog:openFile", handleFileOpen);
 
@@ -146,6 +153,4 @@ ipcMain.handle("close-window", () => {
   }
 });
 
-ipcMain.handle("update-detect", async () => {
-  handleUpgrade();
-});
+ipcMain.handle("update-detect", handleUpgrade);

@@ -8,14 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 
 declare global {
   interface Window {
-    actions: {
-      minimize: () => void;
-      maximize: () => void;
-      close: () => void;
-      updateMessage: () => Promise<void>;
-      onUpdateCounter: (senFunc: (val: string) => void) => Promise<any>;
-      setNum: (countNum: number) => void;
-    };
+    actions: any;
   }
 }
 
@@ -29,6 +22,9 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   password!: string;
 
   counter: number = 0;
+
+  isUpdate = false;
+  isDownload = false;
 
   constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     console.log('Constructor running');
@@ -52,15 +48,13 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
 
   //triggered update
   updateCounter() {
-    console.log('into update function');
+    console.log('into update function', window);
 
     window.actions.onUpdateCounter((getNumber: string) => {
       console.log('number getter', getNumber);
       this.counter += Number(getNumber);
 
       window.actions.setNum(this.counter);
-
-     
 
       this.cdr.detectChanges();
     });
@@ -82,14 +76,7 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
 
   //handling callback
   handleUpgradeButtonClick() {
-    console.log('Upgrade element clicked', window);
-    window.actions
-      .updateMessage()
-      .then(() => {
-        console.log('Masseage updated successfully...');
-      })
-      .catch((error) => {
-        console.error('An error occurred while updating the message:', error);
-      });
+    console.log('Upgrade element clicked');
+    window.actions.updateMessage();
   }
 }
